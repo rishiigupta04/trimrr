@@ -7,9 +7,9 @@ import { BackgroundBeams } from "@/components/ui/background-beams";
 
 const AppLayout = () => {
   return (
-    <div className="bg-slate-800">
+    <div className="bg-slate-800 overflow-hidden">
       <div className="relative min-h-screen w-full ">
-        <BackgroundBeams className="absolute inset-0 w-full h-full scale-150 sm:scale-100  pointer-events-none" />
+        <BackgroundBeams className="absolute inset-0 w-full h-full scale-150 sm:scale-100  pointer-events-none overflow-hidden" />
         <div className="relative z-10 flex flex-col items-center antialiased px-4 sm:px-0">
           <main className="min-h-screen container">
             <Header />
