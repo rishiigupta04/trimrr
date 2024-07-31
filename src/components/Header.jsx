@@ -18,8 +18,8 @@ const Header = () => {
 
   return (
     <nav className="flex justify-between items-center p-4 ">
-      <Link>
-        <img src="/logo.png" alt="trimmr logo" className="h-20" />
+      <Link to="/">
+        <img src="/logo.png" alt="trimmr logo" className="h-12 sm:h-20" />
       </Link>
 
       <div>

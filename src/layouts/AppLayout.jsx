@@ -13,9 +13,9 @@ const AppLayout = () => {
       </main>
 
       <footer>
-        <div className="text-center p-6 bg-gray-900  mt-10 font-thin tracking-widest flex items-center justify-center gap-6">
+        <div className="text-center p-6 bg-gray-900  mt-10 font-thin tracking-widest flex items-center justify-center gap-6 text-sm sm:text-lg">
           Made with ❤️ by Rishi
-          <a href="https://github.com/rishiigupta04" target="_blank">
+          <a href="https://github.com/rishiigupta04/trimrr" target="_blank">
             <Button variant="outline" className="backdrop-invert-0">
               <Github className="mr-2 h-4 w-4" /> Source Code
             </Button>
