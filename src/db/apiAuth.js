@@ -12,7 +12,7 @@ export async function login({ email, password }) {
 }
 
 export async function getCurrentUser() {
-  const { data: session, error } = await supabase.auth.getUser();
+  const { data: session, error } = await supabase.auth.getSession();
   if (!session.session) return null;
   if (error) throw new Error(error.message);
   return session.session?.user;
@@ -35,7 +35,7 @@ export async function signup({ name, email, password, profile_pic }) {
     options: {
       data: {
         name,
-        profile_pic: `www.supabase.com/storage/v1/object/public/profile_pic/${fileName}`,
+        profile_pic: `https://wingshucgaospprtixjt.supabase.co/storage/v1/object/public/profile_pic/${fileName}`,
       },
     },
   });

@@ -19,7 +19,7 @@ const LandingPage = () => {
   };
 
   return (
-    <div className="min-h-screen  py-2 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
         <div className="flex flex-col items-center antialiased">
           <h2 className="my-8 sm:my-12 text-3xl sm:text-5xl lg:text-6xl text-white text-center font-extrabold leading-tight">

@@ -8,8 +8,8 @@ import { BackgroundBeams } from "@/components/ui/background-beams";
 const AppLayout = () => {
   const [searchParams] = useSearchParams();
   return (
-    <div className="bg-slate-800 min-h-screen overflow-hidden">
-      <div className="relative min-h-screen   w-full ">
+    <div className="bg-slate-800 min-h-screen overflow-hidden antialiased">
+      <div className="relative min-h-screen w-full ">
         <BackgroundBeams className="absolute inset-0 w-full h-full scale-150 sm:scale-100  pointer-events-none overflow-hidden" />
         <div className="relative z-10 flex flex-col items-center antialiased px-4 sm:px-0 min-h-screen">
           <main className="min-h-screen container">
