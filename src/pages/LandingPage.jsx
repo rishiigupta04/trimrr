@@ -19,17 +19,14 @@ const LandingPage = () => {
   };
 
   return (
-    <div className="min-h-screen  py-8 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen  py-2 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
         <div className="flex flex-col items-center antialiased">
           <h2 className="my-8 sm:my-12 text-3xl sm:text-5xl lg:text-6xl text-white text-center font-extrabold leading-tight">
             The only URL Shortener <br className="hidden sm:inline" />{" "}
             you&rsquo;ll ever need! 👇
           </h2>
-          <form
-            onSubmit={handleShorten}
-            className="w-full max-w-2xl mb-8 sm:mb-12"
-          >
+          <form onSubmit={handleShorten} className="w-full max-w-2xl  sm:mb-12">
             <div className="flex flex-col sm:flex-row gap-4">
               <Input
                 type="url"
@@ -51,18 +48,18 @@ const LandingPage = () => {
             <img
               src="/banner1.jpg"
               alt="banner for larger devices"
-              className="hidden w-full my-6 sm:block sm:my-11 rounded-lg shadow-lg"
+              className="hidden w-full my-6 sm:block sm:my-0 rounded-lg shadow-lg"
             />
             <img
               src="/banner2.jpg"
               alt="banner for small devices"
-              className="w-full my-6 sm:hidden rounded-lg shadow-lg"
+              className="w-full scale-125 sm:scale-100 my-12 sm:my-6 sm:hidden rounded-lg shadow-lg"
             />
           </div>
           <Accordion
             type="multiple"
             collapsible
-            className="w-full max-w-4xl mt-8 sm:mt-12"
+            className="w-full max-w-4xl  sm:mt-12"
           >
             <AccordionItem value="item-1">
               <AccordionTrigger>
