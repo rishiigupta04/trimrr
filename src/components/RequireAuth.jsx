@@ -9,7 +9,7 @@ const RequireAuth = ({ children }) => {
 
   useEffect(() => {
     if (!loading && !isAuthenticated) {
-      navigate("/login");
+      navigate("/auth");
     }
   }, [isAuthenticated, loading]);
 
