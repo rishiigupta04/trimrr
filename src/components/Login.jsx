@@ -17,6 +17,7 @@ import useFetch from "@/hooks/useFetch";
 import { login } from "@/db/apiAuth";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { UrlState } from "@/context";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -45,7 +46,7 @@ const Login = () => {
     }));
   };
 
-  const handleLogin = async () => {
+  async function handleLogin() {
     setErrors([]);
     //Validating form using Yup and setting errors if any
     try {
@@ -69,7 +70,7 @@ const Login = () => {
       });
       setErrors(newErrors);
     }
-  };
+  }
 
   return (
     <div className="space-y-4 flex items-center justify-center px-4 ">
@@ -122,7 +123,21 @@ const Login = () => {
           {errors.password && <Error message={errors.password} />}
         </CardContent>
         <CardFooter>
-          <Button onClick={handleLogin} className="w-full" variant="default">
+          <Button
+            onClick={() =>
+              handleLogin().then(() =>
+                toast.success("Login Successful", {
+                  position: "bottom-right",
+                  autoClose: 2000,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: false,
+                  draggable: true,
+                  progress: undefined,
+                })
+              )
+            }
+          >
             {loading ? <BeatLoader size={10} color="#0F172A" /> : "Login"}
           </Button>
         </CardFooter>

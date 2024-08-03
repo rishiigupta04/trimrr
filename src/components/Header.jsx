@@ -15,6 +15,7 @@ import { UrlState } from "@/context";
 import useFetch from "@/hooks/useFetch";
 import { logout } from "@/db/apiAuth";
 import { CircleLoader } from "react-spinners";
+import { toast } from "react-toastify";
 
 const Header = () => {
   const { loading, fn: fnLogout } = useFetch(logout);
@@ -58,6 +59,15 @@ const Header = () => {
                     fnLogout().then(() => {
                       fetchUser();
                       navigate("/auth");
+                      toast.success("Logged out successfully", {
+                        position: "bottom-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: false,
+                        draggable: true,
+                        progress: undefined,
+                      });
                     });
                   }}
                   className="cursor-pointer text-red-400"

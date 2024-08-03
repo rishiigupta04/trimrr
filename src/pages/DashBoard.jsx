@@ -46,7 +46,7 @@ const DashBoard = () => {
   );
 
   return (
-    <div className="flex flex-col gap-8">
+    <div className=" mt-6 flex flex-col gap-8">
       {(loading || loadingClicks) && (
         <BarLoader width={"100%"} color={"#fafafa"} />
       )}

@@ -17,6 +17,7 @@ import useFetch from "@/hooks/useFetch";
 import { signup } from "@/db/apiAuth";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { UrlState } from "@/context";
+import { toast } from "react-toastify";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -47,7 +48,7 @@ const SignUp = () => {
     }));
   };
 
-  const handleSignUp = async () => {
+  async function handleSignUp() {
     setErrors([]);
     //Validating form using Yup and setting errors if any
     try {
@@ -75,7 +76,7 @@ const SignUp = () => {
       });
       setErrors(newErrors);
     }
-  };
+  }
 
   return (
     <div className="space-y-4 flex items-center justify-center px-4 ">
@@ -142,24 +143,44 @@ const SignUp = () => {
           </div>
           {errors.password && <Error message={errors.password} />}
           <div className="space-y-2">
-            <Label
+            <label
               htmlFor="profile_pic"
-              className="text-sm font-medium text-gray-200"
+              className="flex justify-center items-center px-4 py-2 bg-slate-800 text-white rounded-lg cursor-pointer hover:bg-slate-700 transition-colors tracking-tight"
             >
-              Profile Picture
-            </Label>
-            <Input
+              Add Profile Picture
+            </label>
+            <span className=" text-sm text-gray-400 font-extralight">
+              {formData.profile_pic?.name}
+            </span>
+            <input
               type="file"
               accept="image/*"
-              className="w-full cursor-pointer"
               onChange={handleInputChange}
               name="profile_pic"
+              id="profile_pic"
+              className="hidden"
             />
           </div>
           {errors.profile_pic && <Error message={errors.profile_pic} />}
         </CardContent>
         <CardFooter>
-          <Button onClick={handleSignUp} className="w-full" variant="default">
+          <Button
+            onClick={() =>
+              handleSignUp().then(() => {
+                toast.success("Account created successfully", {
+                  position: "bottom-right",
+                  autoClose: 2000,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: false,
+                  draggable: true,
+                  progress: undefined,
+                });
+              })
+            }
+            className="w-full"
+            variant="default"
+          >
             {loading ? (
               <BeatLoader size={10} color="#0F172A" />
             ) : (

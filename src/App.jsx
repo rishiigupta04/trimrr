@@ -9,6 +9,8 @@ import Link from "./pages/Link";
 import Redirect from "./pages/Redirect";
 import UrlProvider from "./context";
 import RequireAuth from "./components/RequireAuth";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const router = createBrowserRouter([
   {
@@ -54,6 +56,7 @@ function App() {
   return (
     <UrlProvider>
       <RouterProvider router={router} />
+      <ToastContainer />
     </UrlProvider>
   );
 }
