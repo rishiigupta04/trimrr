@@ -14,14 +14,37 @@ export async function getUrls(user_id) {
   return data;
 }
 
-export async function deleteUrl(id) {
-  const { data, error } = await supabase.from("urls").delete().eq("id", id);
+export async function getLongUrl(id) {
+  try {
+    let { data: shortLinkData, error: shortLinkError } = await supabase
+      .from("urls")
+      .select("id, original_url")
+      .eq("short_url", id)
+      .single();
 
-  if (error) {
-    console.log(error.message);
-    throw new Error("Error deleting URLs");
+    if (shortLinkError && shortLinkError.code === "PGRST116") {
+      // If no match found, try custom_url
+      ({ data: shortLinkData, error: shortLinkError } = await supabase
+        .from("urls")
+        .select("id, original_url")
+        .eq("custom_url", id)
+        .single());
+    }
+    if (shortLinkError) {
+      if (shortLinkError.code === "PGRST116") {
+        console.log("No matching URL found");
+        return null;
+      } else {
+        console.error("Error fetching short link:", shortLinkError);
+        throw shortLinkError;
+      }
+    }
+
+    return shortLinkData;
+  } catch (error) {
+    console.error("Unexpected error in getLongUrl:", error);
+    throw error;
   }
-  return data;
 }
 
 export async function createUrl(
@@ -35,9 +58,7 @@ export async function createUrl(
     .upload(fileName, qrCode);
 
   if (storageError) {
-    console.log(error.message);
-    toast.error(error.message);
-    throw new Error("Error creating URL");
+    throw new Error(storageError.message);
   }
 
   const qr = `https://wingshucgaospprtixjt.supabase.co/storage/v1/object/public/qrs/${fileName}`;
@@ -61,6 +82,16 @@ export async function createUrl(
     console.log(error.message);
     toast.error(error.message);
     throw new Error("Error creating short URL");
+  }
+  return data;
+}
+
+export async function deleteUrl(id) {
+  const { data, error } = await supabase.from("urls").delete().eq("id", id);
+
+  if (error) {
+    console.log(error.message);
+    throw new Error("Error deleting URLs");
   }
   return data;
 }

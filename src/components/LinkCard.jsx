@@ -8,16 +8,15 @@ import { BeatLoader } from "react-spinners";
 import { toast } from "react-toastify";
 
 const LinkCard = ({ url, fetchUrls }) => {
-  const downloadImage = () => {
+  const openImageInNewTab = () => {
     const imageUrl = url?.qr;
-    const fileName = url?.title;
-    const anchor = document.createElement("a");
-    anchor.href = imageUrl;
-    anchor.download = fileName;
-    document.body.appendChild(anchor);
-    anchor.click();
-    document.body.removeChild(anchor);
+    if (imageUrl) {
+      window.open(imageUrl, "_blank");
+    } else {
+      console.error("Image URL is not available");
+    }
   };
+
   const { loading } = useFetch(getUrls, url?.id);
   const { loading: loadingDelete, fn: fnDelete } = useFetch(deleteUrl, url?.id);
 
@@ -65,7 +64,7 @@ const LinkCard = ({ url, fetchUrls }) => {
         </span>
       </Link>
       <div className="flex gap-2">
-        <Button variant="ghost" onClick={downloadImage}>
+        <Button variant="ghost" onClick={openImageInNewTab}>
           <Download className="text-blue-500" />
         </Button>
 

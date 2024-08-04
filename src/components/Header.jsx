@@ -82,11 +82,15 @@ const Header = () => {
                   {user?.user_metadata?.name}
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={() => handleMenuItemClick("/")}>
+                <DropdownMenuItem
+                  className="cursor-pointer"
+                  onClick={() => handleMenuItemClick("/")}
+                >
                   <LucideHome className="mr-2 h-4 w-4" />
                   <span>Home</span>
                 </DropdownMenuItem>
                 <DropdownMenuItem
+                  className="cursor-pointer"
                   onClick={() => handleMenuItemClick("/dashboard")}
                 >
                   <LinkIcon className="mr-2 h-4 w-4" />
