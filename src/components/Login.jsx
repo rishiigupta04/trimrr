@@ -138,7 +138,7 @@ const Login = () => {
               )
             }
           >
-            {loading ? <BeatLoader size={10} color="#0F172A" /> : "Login"}
+            {loading ? <BeatLoader size={10} color="#dadada" /> : "Login"}
           </Button>
         </CardFooter>
       </Card>

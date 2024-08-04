@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "./ui/button";
 import {
@@ -10,7 +10,14 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import { LinkIcon, LogOut, User2Icon } from "lucide-react";
+import {
+  Home,
+  HomeIcon,
+  LinkIcon,
+  LogOut,
+  LucideHome,
+  User2Icon,
+} from "lucide-react";
 import { UrlState } from "@/context";
 import useFetch from "@/hooks/useFetch";
 import { logout } from "@/db/apiAuth";
@@ -21,6 +28,33 @@ const Header = () => {
   const { loading, fn: fnLogout } = useFetch(logout);
   const navigate = useNavigate();
   const { user, fetchUser } = UrlState();
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleMenuItemClick = (path) => {
+    setIsOpen(false);
+    navigate(path);
+  };
+
+  const handleLogout = async () => {
+    setIsOpen(false);
+    try {
+      await fnLogout();
+      fetchUser();
+      navigate("/auth");
+      toast.success("Logged out successfully", {
+        position: "bottom-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+      });
+    } catch (error) {
+      console.error("Logout failed:", error);
+      toast.error("Logout failed. Please try again.");
+    }
+  };
 
   return (
     <>
@@ -33,7 +67,7 @@ const Header = () => {
           {!user ? (
             <Button onClick={() => navigate("/auth")}>Login</Button>
           ) : (
-            <DropdownMenu>
+            <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
               <DropdownMenuTrigger className="w-10 rounded-full overflow-hidden outline-none">
                 <Avatar className="">
                   <AvatarImage src={user?.user_metadata?.profile_pic} />
@@ -48,28 +82,18 @@ const Header = () => {
                   {user?.user_metadata?.name}
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem>
-                  <Link to={"/dashboard"} className="flex items-center">
-                    <LinkIcon className="mr-2 h-4 w-4" />
-                    <span>My Links</span>
-                  </Link>
+                <DropdownMenuItem onClick={() => handleMenuItemClick("/")}>
+                  <LucideHome className="mr-2 h-4 w-4" />
+                  <span>Home</span>
                 </DropdownMenuItem>
                 <DropdownMenuItem
-                  onClick={() => {
-                    fnLogout().then(() => {
-                      fetchUser();
-                      navigate("/auth");
-                      toast.success("Logged out successfully", {
-                        position: "bottom-right",
-                        autoClose: 2000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: false,
-                        draggable: true,
-                        progress: undefined,
-                      });
-                    });
-                  }}
+                  onClick={() => handleMenuItemClick("/dashboard")}
+                >
+                  <LinkIcon className="mr-2 h-4 w-4" />
+                  <span>My Links</span>
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  onClick={handleLogout}
                   className="cursor-pointer text-red-400"
                 >
                   <LogOut className="mr-2 h-4 w-4" />

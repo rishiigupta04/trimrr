@@ -22,7 +22,7 @@ const Auth = () => {
   if (isAuthenticated || loading) {
     return (
       <div className="w-full h-96 flex items-center justify-center">
-        <BeatLoader size={30} color="#0F172A" />
+        <BeatLoader size={30} color="#dadada" />
       </div>
     );
   }

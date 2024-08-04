@@ -182,7 +182,7 @@ const SignUp = () => {
             variant="default"
           >
             {loading ? (
-              <BeatLoader size={10} color="#0F172A" />
+              <BeatLoader size={10} color="#dadada" />
             ) : (
               "Create Account"
             )}
