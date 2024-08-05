@@ -62,6 +62,15 @@ const Login = () => {
       //api call
       await fnLogin();
       // If successful, clear form and redirect to dashboard
+      toast.success("Login Successful", {
+        position: "bottom-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+      });
       setFormData({ email: "", password: "" });
     } catch (e) {
       const newErrors = {};
@@ -123,21 +132,7 @@ const Login = () => {
           {errors.password && <Error message={errors.password} />}
         </CardContent>
         <CardFooter>
-          <Button
-            onClick={() =>
-              handleLogin().then(() =>
-                toast.success("Login Successful", {
-                  position: "bottom-right",
-                  autoClose: 2000,
-                  hideProgressBar: false,
-                  closeOnClick: true,
-                  pauseOnHover: false,
-                  draggable: true,
-                  progress: undefined,
-                })
-              )
-            }
-          >
+          <Button onClick={() => handleLogin()}>
             {loading ? <BeatLoader size={10} color="#dadada" /> : "Login"}
           </Button>
         </CardFooter>

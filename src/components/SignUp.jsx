@@ -65,10 +65,20 @@ const SignUp = () => {
           .min(6, "Password must be at least 6 characters long"),
         profile_pic: Yup.mixed().required("Profile picture is required"),
       });
+
       await schema.validate(formData, { abortEarly: false });
       //api call
       await fnSignUp();
       // If successful, clear form and redirect to dashboard
+      toast.success("Account created successfully", {
+        position: "bottom-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+      });
     } catch (e) {
       const newErrors = {};
       e?.inner?.forEach((error) => {
@@ -165,19 +175,7 @@ const SignUp = () => {
         </CardContent>
         <CardFooter>
           <Button
-            onClick={() =>
-              handleSignUp().then(() => {
-                toast.success("Account created successfully", {
-                  position: "bottom-right",
-                  autoClose: 2000,
-                  hideProgressBar: false,
-                  closeOnClick: true,
-                  pauseOnHover: false,
-                  draggable: true,
-                  progress: undefined,
-                });
-              })
-            }
+            onClick={() => handleSignUp()}
             className="w-full"
             variant="default"
           >
