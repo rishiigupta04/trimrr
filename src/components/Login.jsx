@@ -62,14 +62,15 @@ const Login = () => {
       //api call
       await fnLogin();
       // If successful, clear form and redirect to dashboard
-      toast.success("Login Successful", {
+      toast.success("Logged in successfully", {
         position: "bottom-right",
         autoClose: 2000,
-        hideProgressBar: false,
+        hideProgressBar: true,
         closeOnClick: true,
         pauseOnHover: false,
         draggable: true,
         progress: undefined,
+        theme: "dark",
       });
       setFormData({ email: "", password: "" });
     } catch (e) {

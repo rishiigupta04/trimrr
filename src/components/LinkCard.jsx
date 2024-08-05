@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "./ui/button";
-import { Copy, Delete, DeleteIcon, Download, Trash } from "lucide-react";
+import { Copy, Download, Trash } from "lucide-react";
 import useFetch from "@/hooks/useFetch";
 import { deleteUrl, getUrls } from "@/db/apiUrls";
 import { BeatLoader } from "react-spinners";
@@ -25,13 +25,13 @@ const LinkCard = ({ url, fetchUrls }) => {
     toast.success("Link deleted successfully", {
       position: "bottom-right",
       autoClose: 2000,
-      hideProgressBar: false,
+      hideProgressBar: true,
       closeOnClick: true,
       pauseOnHover: false,
       draggable: true,
       progress: undefined,
       theme: "dark",
-      icon: <Trash className="text-blue-500" />,
+      icon: <Trash className="text-red-500" />,
     });
   }
   return (
@@ -77,7 +77,7 @@ const LinkCard = ({ url, fetchUrls }) => {
                 toast.success("Copied to clipboard", {
                   position: "bottom-right",
                   autoClose: 2000,
-                  hideProgressBar: false,
+                  hideProgressBar: true,
                   closeOnClick: true,
                   pauseOnHover: false,
                   draggable: true,

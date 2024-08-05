@@ -73,11 +73,12 @@ const SignUp = () => {
       toast.success("Account created successfully", {
         position: "bottom-right",
         autoClose: 2000,
-        hideProgressBar: false,
+        hideProgressBar: true,
         closeOnClick: true,
         pauseOnHover: false,
         draggable: true,
         progress: undefined,
+        theme: "dark",
       });
     } catch (e) {
       const newErrors = {};

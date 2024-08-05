@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Button } from "./ui/button";
 import {
   DropdownMenu,
@@ -27,6 +27,7 @@ import { toast } from "react-toastify";
 const Header = () => {
   const { loading, fn: fnLogout } = useFetch(logout);
   const navigate = useNavigate();
+  const location = useLocation();
   const { user, fetchUser } = UrlState();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -44,15 +45,19 @@ const Header = () => {
       toast.success("Logged out successfully", {
         position: "bottom-right",
         autoClose: 2000,
-        hideProgressBar: false,
+        hideProgressBar: true,
         closeOnClick: true,
         pauseOnHover: false,
         draggable: true,
         progress: undefined,
+        theme: "dark",
+        icon: <LogOut className="text-red-500" />,
       });
     } catch (error) {
       console.error("Logout failed:", error);
-      toast.error("Logout failed. Please try again.");
+      toast.error("Logout failed. Please try again.", {
+        theme: "dark",
+      });
     }
   };
 
@@ -65,7 +70,9 @@ const Header = () => {
 
         <div>
           {!user ? (
-            <Button onClick={() => navigate("/auth")}>Login</Button>
+            location.pathname !== "/auth" && (
+              <Button onClick={() => navigate("/auth")}>Login</Button>
+            )
           ) : (
             <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
               <DropdownMenuTrigger className="w-10 rounded-full overflow-hidden outline-none">

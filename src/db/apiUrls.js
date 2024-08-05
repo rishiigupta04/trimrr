@@ -14,6 +14,21 @@ export async function getUrls(user_id) {
   return data;
 }
 
+export async function getUrl({ id, user_id }) {
+  const { data, error } = await supabase
+    .from("urls")
+    .select("*")
+    .eq("id", id)
+    .eq("user_id", user_id)
+    .single();
+
+  if (error) {
+    console.log(error.message);
+    throw new Error("Short URL not found");
+  }
+  return data;
+}
+
 export async function getLongUrl(id) {
   try {
     let { data: shortLinkData, error: shortLinkError } = await supabase
@@ -80,7 +95,9 @@ export async function createUrl(
 
   if (error) {
     console.log(error.message);
-    toast.error(error.message);
+    toast.error(error.message, {
+      theme: "error",
+    });
     throw new Error("Error creating short URL");
   }
   return data;

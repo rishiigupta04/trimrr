@@ -18,6 +18,7 @@ import { QRCode } from "react-qrcode-logo";
 import useFetch from "@/hooks/useFetch";
 import { createUrl } from "@/db/apiUrls";
 import { BeatLoader } from "react-spinners";
+import { toast } from "react-toastify";
 
 export const CreateLink = () => {
   const { user } = UrlState();
@@ -79,6 +80,16 @@ export const CreateLink = () => {
       });
       setErrors(newErrors);
     }
+    toast.success("Link created successfully", {
+      position: "bottom-right",
+      autoClose: 2000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
   };
   return (
     <Dialog
