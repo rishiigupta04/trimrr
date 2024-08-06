@@ -2,11 +2,12 @@ import { storeClicks } from "@/db/apiClicks";
 import { getLongUrl } from "@/db/apiUrls";
 import useFetch from "@/hooks/useFetch";
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { BarLoader } from "react-spinners";
 
 const Redirect = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const { loading, data, fn } = useFetch(getLongUrl, id);
 
@@ -22,16 +23,37 @@ const Redirect = () => {
   useEffect(() => {
     if (!loading && data) {
       fnStats();
+      if (data.original_url) {
+        // Check if the URL starts with http:// or https://
+        const urlToRedirect =
+          data.original_url.startsWith("http://") ||
+          data.original_url.startsWith("https://")
+            ? data.original_url
+            : `https://${data.original_url}`;
+
+        // Redirect to the original URL
+        window.location.href = urlToRedirect;
+      } else {
+        // If no original URL found, redirect to the home page or show an error
+        navigate("/");
+      }
     }
-  }, [loading]);
+  }, [loading, data]);
 
   if (loading || loadingStats) {
     return (
-      <>
-        <BarLoader width={"100%"} size={30} color="#36d7b7" />
-        <br />
-        Redirecting...
-      </>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          height: "100vh",
+        }}
+      >
+        <BarLoader width={200} color="#36d7b7" />
+        <p style={{ marginTop: "20px" }}>Redirecting...</p>
+      </div>
     );
   }
 
