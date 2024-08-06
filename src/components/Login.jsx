@@ -107,7 +107,7 @@ const Login = () => {
             <Input
               type="email"
               placeholder="Enter your email"
-              className="w-full"
+              className="bg-slate-700 text-white"
               value={formData.email}
               onChange={handleInputChange}
               name="email"
@@ -122,10 +122,10 @@ const Login = () => {
               Password
             </Label>
             <Input
+              className="bg-slate-700 text-white"
               type="password"
               name="password"
               placeholder="Enter your password"
-              className="w-full"
               value={formData.password}
               onChange={handleInputChange}
             />

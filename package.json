@@ -28,6 +28,7 @@
     "react-router-dom": "^6.25.1",
     "react-spinners": "^0.14.1",
     "react-toastify": "^10.0.5",
+    "recharts": "^2.12.7",
     "tailwind-merge": "^2.4.0",
     "tailwindcss-animate": "^1.0.7",
     "ua-parser": "^0.3.5",

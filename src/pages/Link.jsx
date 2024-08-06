@@ -17,6 +17,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import LocationStats from "@/components/LocationStats";
+import DeviceStats from "@/components/DeviceStats";
 
 const Link = () => {
   const { id } = useParams();
@@ -88,12 +90,12 @@ const Link = () => {
             {url?.title}
           </span>
           <a
-            href={`https://trimrr.in/${link}`}
+            href={`https://trimrrr.vercel.app/${link}`}
             target="_blank"
             className="flex items-center text-2xl sm:text-4xl text-blue-400 font-bold hover:underline cursor-pointer"
           >
             {/* <StarIcon className="h-4 w-4 sm:h-6 sm:w-6 mr-2 text-white" /> */}
-            {`https://trimrr.in/${link}`}
+            {`https://trimrrr.vercel.app/${link}`}
           </a>
 
           <a
@@ -121,7 +123,7 @@ const Link = () => {
               variant="ghost"
               onClick={() =>
                 navigator.clipboard
-                  .writeText(`https://trimrr.in/${url?.short_url}`)
+                  .writeText(`https://trimrrr.vercel.app/${url?.short_url}`)
                   .then(() => {
                     toast.success("Copied to clipboard", {
                       position: "bottom-right",
@@ -177,11 +179,11 @@ const Link = () => {
               <CardTitle className="text-xl sm:text-2xl font-extrabold">
                 Location Data
               </CardTitle>
-              {/* <Location stats={stats} /> */}
+              <LocationStats stats={stats} />
               <CardTitle className="text-xl sm:text-2xl font-extrabold">
                 Device Info
               </CardTitle>
-              {/* <DeviceStats stats={stats} /> */}
+              <DeviceStats stats={stats} />
             </CardContent>
           ) : (
             <CardContent>
