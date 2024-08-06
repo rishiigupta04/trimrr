@@ -46,13 +46,13 @@ const Redirect = () => {
         style={{
           display: "flex",
           flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
+
           height: "100vh",
         }}
       >
-        <BarLoader width={200} color="#36d7b7" />
         <p style={{ marginTop: "20px" }}>Redirecting...</p>
+        <br />
+        <BarLoader width={"100%"} height={10} color="#36d7b7" />
       </div>
     );
   }
