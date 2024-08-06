@@ -1,6 +1,10 @@
 import { useState } from "react";
 import "./App.css";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+} from "react-router-dom";
 import AppLayout from "./layouts/AppLayout";
 import LandingPage from "./pages/LandingPage";
 import DashBoard from "./pages/DashBoard";
@@ -11,11 +15,20 @@ import UrlProvider from "./context";
 import RequireAuth from "./components/RequireAuth";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import NotFound from "./pages/NotFound";
 
 const router = createBrowserRouter([
   {
     element: <AppLayout />,
     children: [
+      {
+        path: "/404",
+        element: <NotFound />,
+      },
+      {
+        path: "*",
+        element: <Navigate to="/404" replace />,
+      },
       {
         path: "/",
         element: <LandingPage />,

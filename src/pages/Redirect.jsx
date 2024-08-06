@@ -1,15 +1,15 @@
 import { storeClicks } from "@/db/apiClicks";
 import { getLongUrl } from "@/db/apiUrls";
 import useFetch from "@/hooks/useFetch";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { BarLoader } from "react-spinners";
 
-const Redirect = () => {
+const RedirectLink = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const { loading, data, fn } = useFetch(getLongUrl, id);
+  const { loading, data, error, fn } = useFetch(getLongUrl, id);
 
   const { loading: loadingStats, fn: fnStats } = useFetch(storeClicks, {
     id: data?.id,
@@ -24,40 +24,28 @@ const Redirect = () => {
     if (!loading && data) {
       fnStats();
       if (data.original_url) {
-        // Check if the URL starts with http:// or https://
-        const urlToRedirect =
-          data.original_url.startsWith("http://") ||
-          data.original_url.startsWith("https://")
-            ? data.original_url
-            : `https://${data.original_url}`;
-
-        // Redirect to the original URL
-        window.location.href = urlToRedirect;
-      } else {
-        // If no original URL found, redirect to the home page or show an error
-        navigate("/");
+        window.location.href = data.original_url;
       }
     }
   }, [loading, data]);
 
+  useEffect(() => {
+    if (error) {
+      navigate("/404");
+    }
+  }, [error, navigate]);
+
   if (loading || loadingStats) {
     return (
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-
-          height: "100vh",
-        }}
-      >
-        <p style={{ marginTop: "20px" }}>Redirecting...</p>
+      <>
+        <BarLoader width={"100%"} color="#36d7b7" />
         <br />
-        <BarLoader width={"100%"} height={10} color="#36d7b7" />
-      </div>
+        Redirecting...
+      </>
     );
   }
 
   return null;
 };
 
-export default Redirect;
+export default RedirectLink;

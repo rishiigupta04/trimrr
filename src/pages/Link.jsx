@@ -87,7 +87,7 @@ const Link = () => {
 
   const copyToClipboard = () => {
     navigator.clipboard
-      .writeText(`https://trimrrrr.netlify.app/${url?.short_url}`)
+      .writeText(`https://trimrrr.vercel.app/${url?.short_url}`)
       .then(() => {
         toast.success("Copied to clipboard", {
           position: "bottom-right",
@@ -129,12 +129,12 @@ const Link = () => {
           {url?.title}
         </span>
         <a
-          href={`https://trimrrrr.netlify.app/${link}`}
+          href={`https://trimrrr.vercel.app/${link}`}
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center text-2xl sm:text-4xl text-blue-400 font-bold hover:underline cursor-pointer"
         >
-          {`https://trimrrrr.netlify.app/${link}`}
+          {`https://trimrrr.vercel.app/${link}`}
         </a>
         <a
           href={url?.original_url}
