@@ -43,6 +43,13 @@ const RedirectLink = () => {
         Redirecting...
       </>
     );
+  } else {
+    return (
+      <h1 className="mt-12 text-xl sm:text-2xl text-center font-extralight text-gray-400">
+        Error fetching URL or it may not exist. <br /> Please login and try
+        again.
+      </h1>
+    );
   }
 
   return null;

@@ -123,7 +123,7 @@ const Link = () => {
   }
 
   return (
-    <div className="mt-6 flex flex-col sm:flex-row gap-6 justify-between">
+    <div className="mt-6 flex flex-col sm:flex-row gap-6 justify-between w-full">
       <div className="flex flex-col sm:w-2/5 items-start gap-6 rounded-lg">
         <span className="text-4xl sm:text-6xl font-extrabold hover:underline cursor-pointer">
           {url?.title}
