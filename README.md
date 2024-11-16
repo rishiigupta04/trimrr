@@ -1,6 +1,14 @@
-# ![Trimrr Logo](/logo.png) ✂️ Trimrr - URL Shortener
-
-Welcome to **Trimrr**, a modern URL shortener application designed to simplify the process of managing long URLs. 🚀
+<div align="center">
+  <img src="/public/logo.png" alt="Trimrr-Logo" width="120" />
+  <h3 align="center">Trimrr - URL Shortener</h3>
+  <p align="center">
+    Welcome to **Trimrr**, a modern URL shortener application designed to simplify the process of managing long URLs. 🚀
+    <br />
+    <a href="https://trimrrr.vercel.app/"><strong>View Live »</strong></a>
+    <br />
+   
+  </p>
+</div>
 
 ## 🌟 Features
 
