@@ -1,4 +1,4 @@
-# ✂️ Trimrr - URL Shortener
+# ![Trimrr Logo](/logo.png) ✂️ Trimrr - URL Shortener
 
 Welcome to **Trimrr**, a modern URL shortener application designed to simplify the process of managing long URLs. 🚀
 
